@@ -14,10 +14,17 @@ model User {
   externalUserId String  @unique
   bio            String?
 
-  // người mình theo dõi
+  // Mối quan hệ theo dõi
+  // Người mà được tôi theo dõi theo dõi
   following  Follow[] @relation("Following")
-  // người theo dõi mình
+  // Người đang theo dõi tôi
   followedBy Follow[] @relation("FollowedBy")
+
+  // Mối quan hệ chặn
+  // Người mà bị tôi chăn chặn
+  blocking  Block[] @relation("Blocking")
+  // Người đã chặn tôi
+  blockedBy Block[] @relation("BlockedBy")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -37,4 +44,17 @@ model Follow {
   @@unique([followerId, followingId])
   @@index([followerId])
   @@index([followingId])
+}
+
+model Block {
+  id        String @id @default(uuid())
+  blockerId String
+  blockedId String
+
+  blocker User @relation(name: "Blocking", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocked User @relation(name: "BlockedBy", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  @@unique([blockerId, blockedId])
+  @@index([blockerId])
+  @@index([blockedId])
 }
