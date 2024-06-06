@@ -3,6 +3,7 @@ import { dark } from '@clerk/themes'
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 import { ThemeProvider } from '@/components/theme-provider'
@@ -25,6 +26,7 @@ export default function RootLayout({
 				<body className={inter.className}>
 					<ThemeProvider attribute="class" forcedTheme="dark" storageKey="gamehub-theme">
 						{children}
+						<Toaster theme="light" position="bottom-center" />
 					</ThemeProvider>
 				</body>
 			</html>

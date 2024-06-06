@@ -3,10 +3,14 @@
 @tailwind utilities;
 
 html,
-body,
 :root {
 	height: 100%;
 	@apply bg-neutral-900/80;
+}
+
+body {
+	color: inherit !important;
+	background-color: inherit !important;
 }
 
 .hidden-scrollbar {
