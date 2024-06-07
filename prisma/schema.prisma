@@ -1,6 +1,7 @@
 datasource db {
-  provider = "cockroachdb"
-  url      = env("DATABASE_URL")
+  provider     = "cockroachdb"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 generator client {
@@ -26,6 +27,8 @@ model User {
   // Người đã chặn tôi
   blockedBy Block[] @relation("BlockedBy")
 
+  stream Stream?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -44,6 +47,30 @@ model Follow {
   @@unique([followerId, followingId])
   @@index([followerId])
   @@index([followingId])
+}
+
+model Stream {
+  id          String  @id @default(uuid())
+  name        String
+  thumbnaiUrl String?
+
+  ingressId String? @unique
+  serverUrl String?
+  streamKey String?
+
+  isLive              Boolean @default(false)
+  isChatEnabled       Boolean @default(true)
+  isChatDelayed       Boolean @default(false)
+  isChatFollowersOnly Boolean @default(false)
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([ingressId])
 }
 
 model Block {
