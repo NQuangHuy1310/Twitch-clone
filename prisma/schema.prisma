@@ -59,9 +59,9 @@ model Stream {
   streamKey String?
 
   isLive              Boolean @default(false)
-  isChatEnabled       Boolean @default(true)
-  isChatDelayed       Boolean @default(false)
-  isChatFollowersOnly Boolean @default(false)
+  isChatEnabled       Boolean @default(true) //Có bặt chức năng trò chuyện hay không
+  isChatDelayed       Boolean @default(false) //Chat có bị delay hay không
+  isChatFollowersOnly Boolean @default(false) // Chỉ cho người theo dõi chat
 
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
