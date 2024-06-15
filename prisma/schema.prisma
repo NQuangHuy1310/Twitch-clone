@@ -50,9 +50,9 @@ model Follow {
 }
 
 model Stream {
-  id          String  @id @default(uuid())
-  name        String
-  thumbnaiUrl String?
+  id           String  @id @default(uuid())
+  name         String
+  thumbnailUrl String?
 
   ingressId String? @unique
   serverUrl String?
