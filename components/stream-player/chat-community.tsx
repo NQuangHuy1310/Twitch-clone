@@ -27,7 +27,7 @@ export const ChatCommunity = ({ hostName, viewerName, isHidden }: ChatCommunityP
 	const filteredParticipants = useMemo(() => {
 		const deduped = participants.reduce((acc, participant) => {
 			const hostAsViewer = `host-${participant.identity}`
-			if (!acc.some((p) => p.identity === hostAsViewer)) {
+			if (!acc.some((p) => p.identity.trim() === hostAsViewer.trim())) {
 				acc.push(participant)
 			}
 

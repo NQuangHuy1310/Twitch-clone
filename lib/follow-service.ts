@@ -1,7 +1,7 @@
 import { db } from '@/lib/db'
 import { getSelf } from '@/lib/auth-service'
 
-export const getFollowrdUsers = async () => {
+export const getFollowersUser = async () => {
 	try {
 		const self = await getSelf()
 

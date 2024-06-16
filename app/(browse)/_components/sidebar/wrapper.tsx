@@ -4,8 +4,8 @@ import { useIsClient } from 'usehooks-ts'
 
 import { cn } from '@/lib/utils'
 import { useSidebar } from '@/store/use-sidebar'
-import { ToogleSkeleton } from './toggle'
-import { RecommentedSkeleton } from './recommended'
+import { ToggleSkeleton } from './toggle'
+import { RecommendedSkeleton } from './recommended'
 import { FollowingSkeleton } from './following'
 
 interface WrapperProps {
@@ -19,9 +19,9 @@ export const Wrapper = ({ children }: WrapperProps) => {
 	if (!isClient)
 		return (
 			<aside className="fixed left-0 flex flex-col w-[70px] lg:w-60 h-full bg-background border-r border-[#2D2E35] z-[50] transition-all">
-				<ToogleSkeleton />
+				<ToggleSkeleton />
 				<FollowingSkeleton />
-				<RecommentedSkeleton />
+				<RecommendedSkeleton />
 			</aside>
 		)
 

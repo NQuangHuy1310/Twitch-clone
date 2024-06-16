@@ -30,7 +30,7 @@ export const Recommended = ({ data }: RecommendedProps) => {
 						key={user.id}
 						username={user.username}
 						imageUrl={user.imageUrl}
-						isLive={user.stream?.isLive}
+						isLive={user.stream?.isLive!}
 					/>
 				))}
 			</ul>
@@ -38,7 +38,7 @@ export const Recommended = ({ data }: RecommendedProps) => {
 	)
 }
 
-export const RecommentedSkeleton = () => {
+export const RecommendedSkeleton = () => {
 	return (
 		<ul className="px-2">
 			{[...Array(3)].map((_, i) => (
