@@ -29,13 +29,13 @@ export const CommunityItem = ({
 	const isHost = viewerName.trim() === hostName.trim()
 
 	const handleBlock = () => {
-		if (!participantName || !isSelf || !isHost) return
-
-		startTransition(() => {
-			onBlock(participantIdentity)
-				.then(() => toast.success(`Blocked ${participantName}`))
-				.catch(() => toast.error('Something went wrong'))
-		})
+		if (isHost) {
+			startTransition(() => {
+				onBlock(participantIdentity)
+					.then(() => toast.success(`Blocked ${participantName}`))
+					.catch(() => toast.error('Something went wrong'))
+			})
+		} else return
 	}
 
 	return (
@@ -47,7 +47,7 @@ export const CommunityItem = ({
 		>
 			<p style={{ color: color }}>{participantName}</p>
 			{isHost && !isSelf && (
-				<Hint label="Block">
+				<Hint label="Block" asChild>
 					<Button
 						disabled={isPending}
 						onClick={handleBlock}

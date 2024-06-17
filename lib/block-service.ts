@@ -75,7 +75,7 @@ export const unblockUser = async (id: string) => {
 	const self = await getSelf()
 
 	if (self.id === id) {
-		throw new Error('Cannot block yourself')
+		throw new Error('Cannot unBlock yourself')
 	}
 
 	const otherUser = await db.user.findUnique({
@@ -107,4 +107,19 @@ export const unblockUser = async (id: string) => {
 	})
 
 	return unBlock
+}
+
+export const getBlockedUsers = async () => {
+	const self = await getSelf()
+
+	const blockedUsers = await db.block.findMany({
+		where: {
+			blockerId: self.id
+		},
+		include: {
+			blocked: true
+		}
+	})
+
+	return blockedUsers
 }
